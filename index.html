@@ -3,78 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slot Machine Game</title>
+    <title>Blackjack</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: repeating-conic-gradient(
-                #8B0000 0% 25%, /* Dark Red */
-                #165016 25% 50%, /* Dark Green */
-                #8B0000 50% 75%,
-                #165016 75% 100%
-            );
-            background-size: 100px 100px;
-            position: relative;
-            min-height: 100vh;
-        }
-        .slot { font-size: 50px; margin: 10px; }
-        .machine-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-        .machine { text-align: center; padding: 10px; border: 2px solid black; border-radius: 10px; background: white; }
-        button { padding: 10px 20px; font-size: 16px; cursor: pointer; display: block; margin: 10px auto; }
-        .footer {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            font-size: 12px;
-            color: white;
-            opacity: 0.7;
-        }
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .hand { margin: 10px; }
+        .buttons { margin-top: 20px; }
+        .card { display: inline-block; margin: 5px; padding: 10px; border: 1px solid black; }
     </style>
 </head>
 <body>
 
-    <h1 id="title">Slot Machine Game</h1>
-    <p>Money: $<span id="money">100</span></p>
-
-    <div id="machines" class="machine-container">
-        <div class="machine">
-            <div class="slots">
-                <span class="slot">❓</span>
-                <span class="slot">❓</span>
-                <span class="slot">❓</span>
-            </div>
-            <button class="spin-btn">Spin ($10)</button>
-        </div>
+    <h1>Blackjack</h1>
+    
+    <div>
+        <h2>Dealer's Hand</h2>
+        <div id="dealer-hand" class="hand"></div>
     </div>
 
-    <button id="buy-machine-btn">Buy Slot Machine ($50)</button>
-    <button id="buy-auto-spinner-btn">Buy Auto Spinner ($30)</button>
-    <p id="message"></p>
+    <div>
+        <h2>Your Hand</h2>
+        <div id="player-hand" class="hand"></div>
+    </div>
 
-    <div class="footer">Made by Nathan Wingard</div>
+    <h2 id="status"></h2>
 
-    <script>
-        let money = 100;
-        document.getElementById("title").addEventListener("click", function() {
-            money += 100;
-            document.getElementById("money").textContent = money;
-        });
+    <div class="buttons">
+        <button id="hit">Hit</button>
+        <button id="stand">Stand</button>
+        <button id="restart">Restart</button>
+    </div>
 
-        document.querySelector(".spin-btn").addEventListener("click", function() {
-            if (money >= 10) {
-                money -= 10;
-                document.getElementById("money").textContent = money;
-                let slots = document.querySelectorAll(".slot");
-                let symbols = ["🍒", "🍋", "🍉", "⭐", "🔔"];
-                let results = [symbols[Math.floor(Math.random() * symbols.length)], 
-                               symbols[Math.floor(Math.random() * symbols.length)], 
-                               symbols[Math.floor(Math.random() * symbols.length)]];
-                slots.forEach((slot, i) => slot.textContent = results[i]);
-            } else {
-                document.getElementById("message").textContent = "Not enough money!";
-            }
-        });
-    </script>
+    <script src="blackjack.js"></script>
+
 </body>
 </html>
